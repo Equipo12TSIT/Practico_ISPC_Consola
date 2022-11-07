@@ -1,4 +1,4 @@
-# Practico-Integrador
+### Practico-Integrador
 TRABAJO INTEGRADOR – Programación Inicial y Bases de Datos
 
 Una conocida casa de música de la ciudad de Formosa capital solicitó a nuestra empresa de
@@ -36,6 +36,9 @@ Miembros del equipo de desarrollo:
 -Hugo Orlando Benitez.
 -Ana Santillán.
 -Carina Fariaz.
+
+![imagen](https://user-images.githubusercontent.com/114720239/200226600-b282784c-e7a6-46e7-848c-ccfe83f489a6.png)
+
 
 
 
