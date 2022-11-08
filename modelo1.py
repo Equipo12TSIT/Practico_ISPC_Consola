@@ -4,11 +4,11 @@ class conectar:
         def __init__(self):
           try:
                self.conexion = mysql.connector.connect(
-                host = 'localhost',
+                host = 'bxxc0tkhaeyzswnmqrgd-mysql.services.clever-cloud.com',
                 port = 3306,
-                user = 'root',
-                password = 'root',
-                db = 'disqueria' 
+                user = 'uj0iv2ccqtlaeb23',
+                password = 'x9ckzcWrjhrauD6wpoM1',
+                db = 'bxxc0tkhaeyzswnmqrgd' 
                )
         
           except mysql.connector.Error as descrpcionError:
@@ -122,7 +122,7 @@ class conectar:
             if self.conexion.is_connected():
                 try:
                    cursor1 = self.conexion.cursor()
-                   sentenciaSQL = """SELECT nombre FROM album WHERE nombre LIKE %s"%"; """                        
+                   sentenciaSQL = """SELECT cod_album, album.nombre, interprete.nombre, interprete.apellido, genero.nombre, discografica.nombre, precio, cantidad, formato.tipo FROM album, interprete, discografica, formato, genero WHERE album.nombre LIKE "%"%s"%" AND album.id_interprete = interprete.id_interprete AND album.id_discografica = discografica.id_discografica AND album.id_formato = formato.id_formato AND album.id_genero = genero.id_genero ORDER BY interprete.apellido DESC"""                        
                    data = (nombre,)
                    cursor1.execute(sentenciaSQL, data)
                    resultados = cursor1.fetchall()
@@ -144,6 +144,24 @@ class conectar:
                     return resultados                          
                 except mysql.connector.Error as descripcionError:                   
                       print('No se conecto', descripcionError)
+        
+        def BuscarPorGenero(self, id_genero):
+            if self.conexion.is_connected():
+                try:
+                   cursor1 = self.conexion.cursor()
+                   sentenciaSQL = """SELECT cod_album, album.nombre, interprete.nombre, interprete.apellido, genero.nombre, discografica.nombre, precio, cantidad, formato.tipo 
+                                    FROM album, interprete, discografica, formato, genero WHERE genero.id_genero LIKE "%"%s"%" 
+                                    AND album.id_interprete = interprete.id_interprete AND album.id_discografica = discografica.id_discografica AND album.id_formato = formato.id_formato AND album.id_genero = genero.id_genero 
+                                    ORDER BY interprete.apellido DESC"""                        
+                   data = (id_genero,)
+                   cursor1.execute(sentenciaSQL, data)
+                   resultados = cursor1.fetchall()
+                   self.conexion.close()
+                   return resultados
+
+                except mysql.connector.Error as descripcionError:                   
+                      print('No se conecto', descripcionError) 
+
 
         def InsertarGenero(self, Genero):
             if self.conexion.is_connected():
@@ -415,12 +433,13 @@ class conectar:
                 except mysql.connector.Error as descripcionError:
                     print("¡No se conectó!",descripcionError) 
 
-        def ListarTema(self):
+        def ListarTema(self,id_album):
             if self.conexion.is_connected():
                 try:
                     cursor1 = self.conexion.cursor()
-                    sentenciaSQL = "SELECT * from tema"
-                    cursor1.execute(sentenciaSQL)
+                    sentenciaSQL = 'SELECT * from tema WHERE tema.id_album= %s'
+                    data = (id_album,)
+                    cursor1.execute(sentenciaSQL, data)
                     resultados = cursor1.fetchall()
                     self.conexion.close()
                     return resultados

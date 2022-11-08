@@ -19,7 +19,8 @@ while True:
     print("2 - BAJAS  \U0001F4E5 ")
     print("3 - MODIFICACION \U0001FA93")
     print("4 - LISTADOS \U0001F4F0")
-    print("5 - BUSCAR POR INICIAL ALBUM \U0001F4D1")
+    print("5 - BUSCAR ALBUM POR NOMBRE  \U0001F4D1")
+    print("6 - BUSCAR ALBUM POR GENERO  \U0001F4D1")
     print("\n")
     
     
@@ -45,7 +46,7 @@ while True:
         elif opc == 3:
             controlador1.InsertGenero()
         elif opc == 4:
-            controlador1. InsertDiscografica()
+            controlador1.InsertDiscografica()
         elif opc == 5:
             controlador1.InsertFormato()       
         elif opc == 6:
@@ -132,4 +133,6 @@ while True:
             print("¡Opción incorrecta!  \U000026D4")
             continue
     elif opcion == 5:
-        controlador1.ListarAlbumPorNombre()  
+        controlador1.ListarAlbumPorNombre()
+    elif opcion == 6:
+        controlador1.ListarAlbumPorGenero()
