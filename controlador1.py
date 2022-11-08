@@ -3,23 +3,6 @@ import modelo1
 from tabulate import tabulate
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def ListarAlbumesPorArtistas():
     con = modelo1.conectar()
     print('\n|COD. ÁLBUM|\t','| NOMBRE |\t','|       INTERPRETE       |\t','|  GENERO  |','| DISCOGRAFICA |','| PRECIO |','|CANTIDAD|','|FORMATO|')
@@ -29,9 +12,19 @@ def ListarAlbumesPorArtistas():
 
 def ListarAlbumPorNombre():
     con = modelo1.conectar()
-    nombre = input("\nIngrese la primera letra del álbum que esta buscando:")
+    nombre = input("\nIngrese datos del álbum que esta buscando:")
     listado = con.BuscarPorNombreDeAlbum(nombre)
-    print("\n|  Álbumes Disponibles: |\n")    
+    print("\n|  Álbumes Disponibles: |\n")  
+    print('\n|COD. ÁLBUM|\t','| NOMBRE |\t','|       INTERPRETE       |\t','|  GENERO  |','| DISCOGRAFICA |','| PRECIO |','|CANTIDAD|','|FORMATO|')  
+    print(tabulate(listado, tablefmt='fancy_grid'))
+    input("\nPresione ENTER para continuar\n") 
+
+def ListarAlbumPorGenero():
+    con = modelo1.conectar()
+    id_genero = input("\nIngrese ID del Género que esta buscando:")
+    listado = con.BuscarPorGenero(id_genero)
+    print("\n|  Álbumes Disponibles: |\n")  
+    print('\n|COD. ÁLBUM|\t','| NOMBRE |\t','|       INTERPRETE       |\t','|  GENERO  |','| DISCOGRAFICA |','| PRECIO |','|CANTIDAD|','|FORMATO|')  
     print(tabulate(listado, tablefmt='fancy_grid'))
     input("\nPresione ENTER para continuar\n") 
 
@@ -432,11 +425,18 @@ def ModificTema():
     input("\nPresione ENTER para continuar\n") 
 
 def listTema():
-    print("\n| Temas disponibles |\n")
-    con = modelo1.conectar()
-    print(tabulate(con.ListarTema(), tablefmt='fancy_grid'))
-      
-    input("\nPresione ENTER para continuar\n")          
+    
+    con=modelo1.conectar()
+    id_album = input("\nIngrese ID del Album que esta buscando:")
+    listado = con.ListarTema(id_album)
+    print("\n|  Álbumes Disponibles: |\n")  
+    print('\n|ID|\t','|          NOMBRE           |\t','|  DURACION  |\t','|     AUTOR     |','|     COMPOSITOR     |','| ID_ALBUM |','| INTERPRETE |')  
+    print(tabulate(listado, tablefmt='fancy_grid'))
+    input("\nPresione ENTER para continuar\n") 
+
+
+
+            
 
 
 #--------------------------------------------------------------------------
